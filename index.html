@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>InstructAvatar</title>
+    <!-- <link rel="shortcut icon" type="image/jpg" href="img/favicon.ico" /> -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"> -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <script src="https://kit.fontawesome.com/49f46e7382.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+        <div class="container is-max-desktop">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="https://www.microsoft.com/en-us/research/lab/microsoft-research-asia/">
+                    <img src="img/Microsoft-logo.svg" alt="Microsoft Research Asia" style="height: 1.4rem;">
+                </a>
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+        </div>
+    </nav> -->
+
+    <section class="section">
+        <div class="container is-max-widescreen">
+            <h1 class="title is-2 has-text-centered">
+              InstructAvatar: Text-Guided Emotion and Motion Control for Avatar Generation
+            </h1>
+            <p class="subtitle is-4 has-text-centered">
+                 <br>
+            </p>
+        </div>
+        <!-- <div class="container is-max-desktop">
+            <p class="subtitle is-6 has-text-centered authors" style="line-height: 1.2;">
+                <span>
+                    <a href="https://www.microsoft.com/en-us/research/people/tianyuhe" class="has-tooltip-bottom" data-tooltip="* indicates equal contribution">Tianyu&nbsp;He</a><sup>*</sup>
+                </span>
+                <span>
+                    <a href="https://leoguojl.me/" class="has-tooltip-bottom" data-tooltip="* indicates equal contribution">Junliang&nbsp;Guo</a><sup>*</sup>
+                </span>
+                <span>
+                    <a href="mailto:v-runyiyu@microsoft.com" class="has-tooltip-bottom" data-tooltip="* indicates equal contribution">Runyi&nbsp;Yu</a><sup>*</sup>
+                </span>
+                <span>
+                    <a href="mailto:v-yuchiwang@microsoft.com" class="has-tooltip-bottom" data-tooltip="* indicates equal contribution">Yuchi&nbsp;Wang</a><sup>*</sup>
+                </span>
+                <span>
+                    <a href="mailto:v-jialzhu@microsoft.com">Jialiang&nbsp;Zhu</a>
+                </span>
+                <span>
+                    <a href="mailto:v-ankaikai@microsoft.com">Kaikai&nbsp;An</a>
+                </span>
+                <span>
+                    <a href="mailto:v-leyili@microsoft.com">Leyi&nbsp;Li</a>
+                </span>
+                <span>
+                    <a href="https://www.microsoft.com/en-us/research/people/xuta" class="has-tooltip-bottom" data-tooltip="† indicates corresponding author">Xu&nbsp;Tan</a><sup>†</sup>
+                </span>
+                <span>
+                    <a href="https://www.chunyuwang.org/">Chunyu&nbsp;Wang</a>
+                </span>
+                <span>
+                    <a href="https://ancientmooner.github.io/">Han&nbsp;Hu</a>
+                </span>
+                <span>
+                    <a href="mailto:musclewu@microsoft.com">HsiangTao&nbsp;Wu</a>
+                </span>
+                <span>
+                    <a href="mailto:Sheng.Zhao@microsoft.com">Sheng&nbsp;Zhao</a>
+                </span>
+                <span>
+                    <a href="https://sites.google.com/view/jiangbian">Jiang&nbsp;Bian</a>
+                </span>
+            </p>
+            <p class="subtitle is-6 has-text-centered authors" style="line-height: 1.0;">
+                <span>
+                    Microsoft
+                </span>
+            </p>
+        </div> -->
+        <!-- <div class="container is-max-desktop has-text-centered mt-5">
+            <a href="https://microsoft.com" class="button is-rounded is-link is-light mr-2">
+                <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                <span>Paper</span>
+            </a>
+            <!-- <a href="https://xxx" class="button is-rounded is-link is-light mr-2">
+                <span class="icon"><i class="fas fa-file"></i></span>
+                <span>Supplementary</span>
+            </a> -->
+            <!-- <a href="https://arxiv.org" class="button is-rounded is-link is-light mr-2">
+                <span class="icon"><i class="ai ai-arxiv"></i></span>
+                <span>arXiv</span>
+            </a>
+            <!-- <a href="https://xxx" class="button is-rounded is-link is-light mr-2">
+                <span class="icon"><i class="fab fa-youtube"></i></span>
+                <span>Video</span>
+            </a> -->
+            <!-- <a href="https://microsoft.com" class="button is-rounded is-link is-light">
+                <span class="icon"><i class="fab fa-github"></i></span>
+                <span>Code (Coming soon)</span>
+            </a> --> 
+        <!-- </div> --> 
+    </section>
+
+    <!-- <section>
+        <div class="container is-max-desktop">
+            <figure class="image is-16by9">
+                <iframe class="has-ratio" width="640" height="360" src="https://www.youtube.com/embed/1jFKPdcivvk" frameborder="0" allowfullscreen></iframe>
+            </figure>
+        </div>
+    </section> -->
+
+    <!-- video carousel -->
+    <section>
+        <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <!-- <hr style="margin-top:0px"> -->
+                <!-- <p><center><strong>Text-guided emotional talking control</strong></center></p>
+                <p></p>
+                <table style="table-layout: fixed;">
+                <tbody>
+                    <tr>
+                        <td width="33%"> <video width="95%" controls> <source src="video/1_speech_driven_1.mp4" type="video/mp4"> </video> </td>
+                        <td width="33%"> <video width="95%" controls> <source src="video/1_speech_driven_2.mp4" type="video/mp4"> </video> </td>
+                        <td width="33%"> <video width="95%" controls> <source src="video/1_speech_driven_3.mp4" type="video/mp4"> </video> </td>
+                         <td width="33%"> <video width="95%" controls> <source src="video/1_speech-driven.mp4" type="video/mp4"> </video> </td> -->
+                    <!-- </tr>
+                    <tr>
+                        <td width="33%"> <span>   </span> </td>
+                        <td width="33%"> <span>   </span> </td>
+                        <td width="33%"> <span>   </span> </td>
+                        <td width="33%"> <span>   </span> </td> -->
+                    <!-- </tr>
+                </tbody>
+                </table> -->
+                <!-- <br> -->
+                <!-- <hr style="margin-top:0px">
+                <p><center><strong>Video-driven Talking Avatar Generation</strong></center></p>
+                <p></p>
+                <table style="table-layout: fixed;">
+                <tbody>
+                    <tr>
+                        <td width="50%"> <video width="95%" controls> <source src="video/2_video_driven_1.mp4" type="video/mp4"> </video> </td>
+                        <td width="50%"> <video width="95%" controls> <source src="video/2_video_driven_2.mp4" type="video/mp4"> </video> </td> --> 
+                        <!-- <td width="33%"> <video width="95%" controls> <source src="video/2_video_driven_3.mp4" type="video/mp4"> </video> </td> -->
+                        <!-- <td width="25%"> <video width="95%" controls> <source src="video/1_speech-driven.mp4" type="video/mp4"> </video> </td>
+                    </tr>
+                    <tr>
+                        <td width="50%"> <span>   </span> </td>
+                        <td width="50%"> <span>   </span> </td>
+                         <td width="33%"> <span>   </span> </td> -->
+                        <!-- <td width="25%"> <span>   </span> </td> -->
+                    <!-- </tr>
+                </tbody>
+                </table>
+                <br>
+                <hr style="margin-top:0px">
+                <table style="table-layout: fixed;">
+                <tbody>
+                    <tr>
+                        <td width="65%"> <span><center><strong> <a href="#posecontrol">Pose-controllable Talking Avatar Generation</a> </strong></center></span> </td> -->
+                        <!-- <td width="35%"> <span><center><strong> <a href="#fullcontrol">Fully Controllable Talking Avatar Generation</a> </strong></center></span> </td> -->
+                    <!-- </tr>
+                    <tr>
+                        <td width="66.4%"> <video width="95%" controls> <source src="video/3_pose_control.mp4" type="video/mp4"> </video> </td>
+                        <td width="32%"> <video width="95%" controls> <source src="video/4_full_control.mp4" type="video/mp4"> </video> </td>
+                    </tr>
+                </tbody> -->
+                <!-- </table> -->
+                <!-- <br> -->
+                <hr style="margin-top:0px">
+                <table style="table-layout: fixed;">
+                    <tbody>
+                        <tr>
+                            <td width="33%"> <span><center><strong> Talk with a mixture of happy and surprised emotions. </strong></center></span> </td>
+                            
+                            <td width="33%"> <span><center><strong> Speak with your eyebrows and lids raised. </strong></center></span> </td>
+                            <td width="33%"> <span><center><strong> Sing with happy emotion. </strong></center></span> </td>
+                            
+                        </tr>
+                        <tr>
+                            <td width="33%"> <video width="95%" controls> <source src="video/emotional_talking/1.mp4" type="video/mp4"> </video> </td>
+                            <td width="33%"> <video width="95%" controls> <source src="video/emotional_talking/2.mp4" type="video/mp4"> </video> </td>
+                            <td width="33%"> <video width="95%" controls> <source src="video/emotional_talking/3.mp4" type="video/mp4"> </video> </td>
+                        </tr>
+                        <tr>
+                            
+                            <td width="33%"> <span><center><strong> Talk with happy emotion. </strong></center></span> </td>
+                            <td width="33%"> <span><center><strong> Be angry when talking. </strong></center></span> </td>
+                            <td width="33%"> <span><center><strong> Speak as if your emotion was astonished. </strong></center></span> </td>
+                            
+                        </tr>
+                        <tr>
+                            <td width="33%"> <video width="95%" controls> <source src="video/emotional_talking/4.mp4" type="video/mp4"> </video> </td>
+                            <td width="33%"> <video width="95%" controls> <source src="video/emotional_talking/5.mp4" type="video/mp4"> </video> </td>
+                            <td width="33%"> <video width="95%" controls> <source src="video/emotional_talking/6.mp4" type="video/mp4"> </video> </td>
+                        </tr>
+                    </tbody>
+                    </table>
+                    <hr style="margin-top:0px">
+                    <table style="table-layout: fixed;">
+                        <tbody>
+                            <tr>
+                                <td width="33%"> <span><center><strong> Open your mouth and close it, and then turn your head left. </strong></center></span> </td>
+                                <td width="33%"> <span><center><strong> Raise your cheek and pull your lip corners. </strong></center></span> </td>
+                                <td width="33%"> <span><center><strong> Lower your head, please. </strong></center></span> </td>
+                                
+                             
+                            </tr>
+                            <tr>
+                                <td width="33%"> <video width="95%" controls> <source src="video/facial_motion/1.mp4" type="video/mp4"> </video> </td>
+                                <td width="33%"> <video width="95%" controls> <source src="video/facial_motion/2.mp4" type="video/mp4"> </video> </td>
+                                <td width="33%"> <video width="95%" controls> <source src="video/facial_motion/3.mp4" type="video/mp4"> </video> </td>
+                            </tr>
+                            <tr>
+                                <td width="33%"> <span><center><strong> Turn your head left, please. </strong></center></span> </td>
+                                <td width="33%"> <span><center><strong> Give me a surprised emotion. </strong></center></span> </td>
+                                <td width="33%"> <span><center><strong> Open your mouth. </strong></center></span> </td>
+                                
+                            </tr>
+                            <tr>
+                                <td width="33%"> <video width="95%" controls> <source src="video/facial_motion/4.mp4" type="video/mp4"> </video> </td>
+                                <td width="33%"> <video width="95%" controls> <source src="video/facial_motion/5.mp4" type="video/mp4"> </video> </td>
+                                <td width="33%"> <video width="95%" controls> <source src="video/facial_motion/6.mp4" type="video/mp4"> </video> </td>
+                            </tr>
+                        </tbody>
+                        </table>
+            </div>
+        </div>
+        </div>
+    <br>
+    </section>
+
+    <section class="section hero is-light">
+        <div class="container is-max-desktop">
+            <h1 class="title is-4">
+                Abstract
+            </h1>
+            <div class="content has-text-justified-desktop">
+                <p>Recent talking avatar generation models have made strides in achieving realistic and accurate lip synchronization with the audio, but often fall short in controlling and conveying detailed expressions and emotions of the avatar, making the generated video less vivid and controllable. </p>
+                  <p> In this paper, we propose <strong>a novel text-guided approach for generating emotionally expressive 2D avatars</strong> , offering fine-grained control, improved interactivity and generalizability to the resulting video. Our framework, named <strong>InstructAvatar</strong>, leverages a natural language interface to control the emotion as well as the facial motion of avatars. We design an automatic annotation pipeline to construct an instruction-video paired training dataset, equipped with a novel two-branch diffusion-based generator to predict avatars with audio and text instructions at the same time. </p>
+                 <p> Experimental results demonstrate that InstructAvatar produces results that align well with both conditions, and
+                    outperforms existing methods in fine-grained emotion control, lip-sync quality, and naturalness. 
+                </p>  
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <h1 class="title is-4">
+                Method
+            </h1>
+            <div class="content has-text-justified-desktop">
+                <img class="mb-5" src="img/model.png">
+                <p>
+                    The InstructAvatar consists of two components: VAE to disentangle motion information from the video and a diffusion model based motion generator to generate the motion latent conditioned on audio and instruction. As we have two types of data, two switches in instruction and audio are designed. During inference, we iteratively denoise Gaussian noise to obtain the predicted motion latent. Together with the user-provided portrait, the resulting video is generated by the decoder of the VAE.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section pt-0">
+        <div class="container is-max-desktop">
+            <h1 class="title is-4">
+                Comparison: Emotional talking face generation
+            </h1>
+            <div class="content has-text-justified-desktop">
+                <video controls="" width="100%">
+                    <source src="video/comparison.mp4" type="video/mp4">
+                </video>
+                <p>
+                    Qualitative comparison with baselines. It shows that InstructAvatar achieves well lip-sync quality and emotion controllability. Additionally, the outputs generated by our model exhibit enhanced naturalness and effectively preserve identity characteristics. It's also worth mentioning that our model infers talking emotion solely based on text inputs, <strong>which intuitively poses a more challenging task</strong>. Additionally, our model supports a broader scope of instructions beyond high-level emotion types, which is absent for most baselines.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section pt-0">
+        <div class="container is-max-desktop">
+            <h1 class="title is-4">
+                Visualization: More results of emotional talking control
+            </h1>
+            <div class="content has-text-justified-desktop">
+                <video controls="" width="100%">
+                    <source src="video/emotion_more.mp4" type="video/mp4">
+                </video>
+                <p>
+                    Additional outcomes concerning text-guided emotional talking control are presented above. We can see that our model exhibits precise emotion control ability, with the generated results appearing natural. Furthermore, InstructAvatar supports fine-grained control and demonstrates reasonable generalization ability beyond the domain.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section pt-0">
+        <div class="container is-max-desktop">
+            <h1 class="title is-4">
+                Visualization: More results of facial motion control
+            </h1>
+            <video controls="" width="100%">
+                <source src="video/motion_more.mp4" type="video/mp4">
+            </video>
+            <p>
+                We show more results about facial motion control above. It is evident that InstructAvatar exhibits remarkable proficiency in following instructions and preserving identity. Furthermore, the generated results appear natural and robust with variations in the provided portrait. Moreover, our model demonstrates fine-grained control capability and performs effectively in out-of-domain scenarios.
+            </p>
+        </div>
+    </section>
+
+    <!-- <section class="section pt-0">
+        <div class="container is-max-desktop">
+            <h1 class="title is-4">
+                Visualization: Fully-Controllable Talking Avatar Generation<a name="fullcontrol"></a>
+            </h1>
+            <div class="content has-text-justified-desktop">
+                <video controls="" width="100%">
+                    <source src="video/4_full-control.mp4" type="video/mp4">
+                </video>
+                <p>
+                    Due to the controllability of the inverse diffusion process, we can control the arbitrary facial attributes by editing the landmarks during generation. Specifically, we train a diffusion model to synthesize the coordinates of the facial landmarks. The fully-controllable talking avatar generation is enabled by generating the mouth-related landmarks from the speech, and the rest is fixed to the reference motion.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section pt-0">
+        <div class="container is-max-desktop">
+            <h1 class="title is-4">
+                Visualization: Text-Instructed Avatar Generation
+            </h1>
+            <div class="content has-text-justified-desktop">
+                <!-- <video class="mb-3 is-16by9" width="100%" autoplay muted loop playsinline> -->
+                <!-- <video controls="" width="100%">
+                    <source src="video/5_text-driven.mp4" type="video/mp4">
+                </video>
+                <p>
+                    To show the generality of our framework, we consider textual instructions as the condition of the avatar generation. Specifically, when provided with a single reference portrait image, the generation should follow textual instructions such as “please smile” or “turn your head left” to generate a video clip with the avatar performing the desired action.
+                </p>
+            </div>
+        </div>
+    </section> --> 
+
+    <section class="section hero is-light">
+        <div class="container is-max-desktop">
+            <h1 class="title is-4">
+                Ethical Consideration
+            </h1>
+            <div class="content has-text-justified-desktop">
+                <p>
+                    InstructAvatar is designed to advance AI research on talking avatar generation. Responsible usage is strongly encouraged, and we discourage users from employing our model to generate intentionally deceptive content or engage in other inauthentic activities. To prevent misuse, adding watermarks is a common approach. Moreover, as a generative model, our results can be utilized to construct artificial datasets and train discriminative models.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- <br>
+    <section class="section pt-0">
+        <div class="container is-max-desktop">
+            <h1 class="title is-4">
+                Citation
+            </h1>
+            <pre>
+@article{he2023gaia,
+    title={GAIA: Zero-shot Talking Avatar Generation},
+    author={He, Tianyu and Guo, Junliang and Yu, Runyi and Wang, Yuchi and Zhu, Jialiang and An, Kaikai and Li, Leyi and Tan, Xu and Wang, Chunyu and Hu, Han and Wu, HsiangTao and Zhao, Sheng and Bian, Jiang},
+    journal={arXiv preprint arXiv:xxxx.xxxxx},
+    year={2023}
+}</pre>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p>
+                Work conducted at the <a href=https://www.microsoft.com/en-us/research/lab/microsoft-research-asia/>Microsoft Research Asia</a>.
+                </br>This page is for research demonstration purposes only.</br>
+                </br>The website template was adapted from <a href=https://microsoft.github.io/FaceSynthetics/>here</a></br>
+                <img src="img/Microsoft-logo-only.svg" class="mt-5" alt="Mixed Reality & AI Lab – Cambridge" style="height: 2rem;">
+            </p>
+        </div>
+    </footer> -->
+</body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // Get all "navbar-burger" elements
+        const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+        // Check if there are any navbar burgers
+        if ($navbarBurgers.length > 0) {
+
+            // Add a click event on each of them
+            $navbarBurgers.forEach(el => {
+                el.addEventListener('click', () => {
+
+                    // Get the target from the "data-target" attribute
+                    const target = el.dataset.target;
+                    const $target = document.getElementById(target);
+
+                    // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+                    el.classList.toggle('is-active');
+                    $target.classList.toggle('is-active');
+
+                });
+            });
+        }
+    });
+</script>
+
+</html>

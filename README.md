@@ -15,7 +15,7 @@ InstructAvatar: Text-Guided Emotion and Motion Control for Avatar Generation
 </h4> -->
 
 <!-- <br> -->
-This repository currently contains <font color='red'>only the implementation of the demo website</font> for the paper "InstructAvatar: Text-Guided Emotion and Motion Control for Avatar Generation."
+This repository currently contains <font color='red'>**only the implementation of the demo website**</font> for the paper "InstructAvatar: Text-Guided Emotion and Motion Control for Avatar Generation."
 
 Since InstructAvatar can generate and control photorealistic talking videos, it poses significant ethical risks of unintended misuse. We are currently undergoing the release process and internal compliance reviews. Please stay tuned!
 

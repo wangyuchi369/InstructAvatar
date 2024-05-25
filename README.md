@@ -1,5 +1,5 @@
 <h1 align="center">
-InstructAvatar: Text-Guided Emotion and Motion Control for Avatar Generation
+<img src="img/star.png" alt="InstructAvatar" style="height: 2rem;"> InstructAvatar: Text-Guided Emotion and Motion Control for Avatar Generation
 </h1>
 <!-- <h4 align="center">
   <a href="https://wangyuchi369.github.io/">Yuchi Wang</a> &nbsp; 
@@ -14,12 +14,28 @@ InstructAvatar: Text-Guided Emotion and Motion Control for Avatar Generation
   <a href="https://xusun26.github.io/">Xu Sun <sup>&dagger;</sup></a>
 </h4> -->
 
+<h4 align="center">
+  <a href="https://wangyuchi369.github.io/InstructAvatar/">[Arxiv]</a> &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://wangyuchi369.github.io/InstructAvatar/">[Demo Page]</a> &nbsp;
+</h4>  
+<div align=center>
+<img src="img/demo.png" width="500" >
+</div>
+
 <!-- <br> -->
+## Attention!
 This repository currently contains <font color='red'>**only the implementation of the demo website**</font> for the paper "InstructAvatar: Text-Guided Emotion and Motion Control for Avatar Generation."
 
 Since InstructAvatar can generate and control photorealistic talking videos, it poses significant ethical risks of unintended misuse. We are currently undergoing the release process and internal compliance reviews. Please stay tuned!
 
-In the meantime, feel free to raise any issues in this repo if you have any questions.
+In the meantime, feel free to raise any issues in this repo if you have any questions!
+
+
+
+
+<!-- <div align=center>
+<img src="img/model.png" width="800" >
+</div> -->
 
 <!-- ## 💡 Introduction
 

@@ -15,7 +15,7 @@
 </h4> -->
 
 <h4 align="center">
-  <a href="https://wangyuchi369.github.io/InstructAvatar/">[Arxiv]</a> &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://arxiv.org/abs/2405.15758">[Arxiv]</a> &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://wangyuchi369.github.io/InstructAvatar/">[Demo Page]</a> &nbsp;
 </h4>  
 <div align=center>
@@ -31,7 +31,18 @@ Since InstructAvatar can generate and control photorealistic talking videos, it 
 In the meantime, feel free to raise any issues in this repo if you have any questions!
 
 
-
+## ☕ Citation
+ If you find our projects helpful to your research, please consider citing our paper:
+```
+@misc{wang2024instructavatar,
+      title={InstructAvatar: Text-Guided Emotion and Motion Control for Avatar Generation}, 
+      author={Yuchi Wang and Junliang Guo and Jianhong Bai and Runyi Yu and Tianyu He and Xu Tan and Xu Sun and Jiang Bian},
+      year={2024},
+      eprint={2405.15758},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+```
 
 <!-- <div align=center>
 <img src="img/model.png" width="800" >

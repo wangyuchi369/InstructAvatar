@@ -15,7 +15,7 @@
 </h4> -->
 
 <h4 align="center">
-  <a href="https://arxiv.org/abs/2405.15758">[Arxiv]</a> &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://arxiv.org/abs/2405.15758">[ArXiv]</a> &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://wangyuchi369.github.io/InstructAvatar/">[Demo Page]</a> &nbsp;
 </h4>  
 <div align=center>

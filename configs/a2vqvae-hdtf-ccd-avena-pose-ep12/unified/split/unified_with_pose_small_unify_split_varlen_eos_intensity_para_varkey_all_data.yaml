@@ -1,0 +1,141 @@
+model:
+  base_learning_rate: 1.e-5
+  scale_learning_rate: False
+  target: talking.models.a2vqvae.diff_keyla_headpose.UnifiedSplitEOSTETFAllTalkingA2VqvaeKeylaPoseModel
+  params:
+    use_au: True
+    use_au_class_loss: False
+    use_para_au: True
+    use_intensity_emotion: True
+    ckpt_path: 'xxxx.ckpt'
+    backbone_config:
+      target: talking.modules.a2vqvae.condconformer.UnifiedSplitTFTEZeroConvCondConformer
+      params:
+        in_dims: 768
+        d_model: 768
+        out_dims: 768
+        num_heads: 12
+        ffn_dim: 2048
+        cond_keyinfo_dim: 768
+        num_layers: 12
+        depthwise_conv_kernel_size: 13
+        dropout: 0.1
+    text_encoder_config:
+      target: talking.modules.vqvae.mlp_encoder.TalkingMLPEncoder
+      params:
+        in_dim: 768
+        out_dim: 768
+        hidden_dim: 1024
+        num_layers: 4
+    keylatent_encoder_config:
+      target: talking.modules.vqvae.mlp_encoder.TalkingMLPEncoder
+      params:
+        in_dim: 768
+        out_dim: 768
+        hidden_dim: 512
+        num_layers: 4
+    audio_encoder_config:
+      target: talking.modules.a2diffae.conformer.PosConformer
+      params:
+        input_dim: 512
+        output_dim: 768
+        num_heads: 4
+        ffn_dim: 1024
+        num_layers: 4
+        depthwise_conv_kernel_size: 13
+        dropout: 0.1
+    lr_scheduler_config:
+      target: inverse_sqrt
+      params:
+        num_warmup_steps: 8000
+        frequency: 1
+    latent_denorm_mean: 0.0
+    latent_denorm_std: 4.0
+    monitor: 'val/loss_x0_epoch'
+    # zero_optim: True
+
+data:
+  target: main.DataModuleFromConfig
+  params:
+    batch_size: 32
+    num_workers: 32
+    train_pin_memory: True
+    train_prefetch_factor: 16
+    shuffle_val_dataloader: True
+    train_collect_fn:
+      target: talking.data.a2vqvae_hdtf_ccd_avena.keyla_lmdbdir_pose.VarLenTETFUnifyRandomKeylaTalkingCollateFunc
+      params: 
+        target_dim: 768
+        audio_feat_dim: 512
+        pose_dim: 3
+    val_collect_fn: 
+      target: talking.data.a2vqvae_hdtf_ccd_avena.keyla_lmdbdir_pose.VarLenTETFUnifyRandomKeylaTalkingCollateFunc
+      params: 
+        target_dim: 768
+        audio_feat_dim: 512
+        pose_dim: 3
+    train:
+      target: talking.data.a2vqvae_hdtf_ccd_avena.keyla_lmdbdir_pose.VarLenTETFUnifyRandomKeylaTalkingA2VqvaeSeqKeylaSepeLMDBTrain
+      params:
+        data_root: /mnt/blob/xxxx/TETF/datasets/lmdbs_uni_pose_au/
+        data_root2: /home/aiscuser/AVENA_CCD_HDTF
+        data_root3: /mnt/shared_data/xxxx/projects/talkingface_LM/datasets/AVENA_CCD_HDTF
+        lmdb_dir_list: ['hdtf_lmdb_all_au_pose_train_subset', 'mead_lmdb_all_au_pose_train', 'text2motion_lmdb_all_au_pose_train_subset']
+        target_key: motion_latent
+        keyla_key: motion_latent
+        use_au: True
+        # use_neutral: True
+        use_random_emotion: True
+        min_num_frames: 24
+        max_num_frames: 250
+        target_motion_dim: 768
+        target_ldmk_dim: 1338
+        norm_mean: 0.0
+        norm_std: 4.0
+    validation:
+      target: talking.data.a2vqvae_hdtf_ccd_avena.keyla_lmdbdir_pose.VarLenTETFUnifyRandomKeylaTalkingA2VqvaeSeqKeylaSepeLMDBValidation
+      params:
+        data_root: /mnt/blob/xxxx/TETF/datasets/lmdbs_uni_pose_au/
+        data_root2: /home/aiscuser/AVENA_CCD_HDTF
+        data_root3: /mnt/shared_data/xxxx/projects/talkingface_LM/datasets/AVENA_CCD_HDTF
+        lmdb_dir_list: ['hdtf_lmdb_all_au_pose_valid', 'mead_lmdb_all_au_pose_valid', 'text2motion_lmdb_all_au_pose_valid']
+        use_au: True
+        # use_neutral: True
+        use_random_emotion: True
+        target_key: motion_latent
+        keyla_key: motion_latent
+        min_num_frames: 24
+        max_num_frames: 250
+        target_motion_dim: 768
+        target_ldmk_dim: 1338
+        norm_mean: 0.0
+        norm_std: 4.0
+
+lightning:
+  callbacks:
+    latent_logger:
+      target: main.LatentLogger
+      params:
+        batch_frequency: 5000
+        batch_frequency_val: 1
+        increase_log_steps: False
+        max_latents: 10
+  gradscaler:
+    target: torch.cuda.amp.GradScaler
+    params:
+      init_scale: 65536
+      growth_factor: 2.0
+      backoff_factor: 0.5
+      growth_interval: 2000
+      enabled: True
+  modelcheckpoint:
+    params:
+      save_top_k: 30
+  trainer:
+    strategy: ddp_find_unused_parameters_true
+    precision: 16
+    benchmark: True
+    accumulate_grad_batches: 1
+    log_every_n_steps: 200
+    check_val_every_n_epoch: 200
+    max_epochs: 10000

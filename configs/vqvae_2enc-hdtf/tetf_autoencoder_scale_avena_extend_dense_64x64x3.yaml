@@ -1,0 +1,77 @@
+model:
+  base_learning_rate: 4.5e-6
+  target: talking.models.vqvae_2enc.autoencoder.AutoEncoderKLwithLDMK
+  params:
+    monitor: "val/rec_loss"
+    embed_dim: 3
+    cross_concat: True
+    gradient_checkpointing: True
+    ldmk_kl_loss: True
+    first_init: True
+    ckpt_path: '/the/path/to/stable-diffusion/kl-f4/model.ckpt'
+    lossconfig:
+      target: talking.modules.vqvae_2enc.losses.LPIPSWithDiscriminator
+      params:
+        disc_start: 0
+        kl_weight: 0.000001
+        disc_weight: 0.5
+
+    ddconfig:
+      double_z: True
+      z_channels: 3
+      resolution: 256
+      in_channels: 3
+      out_ch: 3
+      ch: 256
+      ch_mult: [ 1,2,4 ]  # num_down = len(ch_mult)-1
+      num_res_blocks: 8
+      attn_resolutions: [ ]
+      dropout: 0.0
+
+
+data:
+  target: main.DataModuleFromConfig
+  params:
+    batch_size: 4
+    num_workers: 5
+    wrap: False
+    train:
+      target: talking.data.vqvae_2enc_hdtf.diffae_data.ExtendedAvenaDataset
+      params:
+        hdtf_folder: "xxxxx"
+        tk1k_folder: "xxxxx"
+        avena_folder: "xxxxx"
+        split: "train"
+        dense_ldmk: True
+    validation:
+      target: talking.data.vqvae_2enc_hdtf.diffae_data.ExtendedAvenaDataset
+      params:
+        hdtf_folder: "xxxxxx"
+        tk1k_folder: "xxxxxx"
+        avena_folder: "xxxxxx"
+        split: "val"
+        dense_ldmk: True
+
+lightning:
+  callbacks:
+    image_logger:
+      target: main.ImageLogger
+      params:
+        batch_frequency: 500
+        max_images: 8
+        increase_log_steps: False
+  gradscaler:
+    target: torch.cuda.amp.GradScaler
+    params:
+      init_scale: 65536
+      growth_factor: 2.0
+      backoff_factor: 0.5
+      growth_interval: 2000
+      enabled: True
+  modelcheckpoint:
+    params:
+      save_top_k: 10
+  trainer:
+    benchmark: True
+    precision: 16
+    num_nodes: 2

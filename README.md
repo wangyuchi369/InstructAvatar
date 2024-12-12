@@ -56,7 +56,7 @@ We are actively working on open-sourcing this project. However, due to certain c
 
 
 
-We understand that the absence of GAIA's code, datasets, and pretrained weights may limit the immediate usability of our model. Therefore, ‼️ we aim to position this repository as a **training recipe for text-guided avatar generation**‼️. Our goal is to provide essential preprocessing scripts, model training code, and step-by-step guidance so users can train their own models from scratch.  ✨
+We understand that the absence of GAIA's code, datasets, and pretrained weights may limit the immediate usability of our model. Therefore, ‼️ we aim to position this repository as a **general training recipe for text-guided avatar generation**‼️. Our goal is to provide essential preprocessing scripts, model training code, and step-by-step guidance so users can train their own models from scratch.  ✨
 
 We sincerely apologize for any inconvenience this may cause. If you have any questions, please feel free to reach out to us. Thank you for your understanding and support! 🤗  
 
@@ -146,14 +146,14 @@ We use the **[GAIA model](https://www.microsoft.com/en-us/research/publication/g
 Run the following script to extract latents: `preprocess/infer_latent/infer_MEAD.sh`
 
 > **⚠️ Important Note**:  
-> The GAIA model and its landmark extraction tool are closed-source, so **this step cannot be executed directly**. We provide suggestions later in this repository for training your own minimal GAIA-like model.  
+> The GAIA model and its landmark extraction tool are closed-source, so **this step cannot be executed directly**. We provide suggestions [later in this repository](https://github.com/wangyuchi369/InstructAvatar?tab=readme-ov-file#-your-own-minimal-vae-gaia) for training your own minimal GAIA-like model.  
 
 
 
 #### Instructions
 The process to obtain the textual instructions is as follows:  
 
-1. **Extract Action Units (AU)**: Use this script to extract AU features:  
+1. **Extract Action Units (AU)**: Use this script to extract AU features by [facetorch](https://github.com/tomas-gajarsky/facetorch):  
    `preprocess/MEAD_utils/detect_au/face_torch_mead.py`
 
 2. **Generate Instructions via GPT**: Use GPT to convert AU features into natural language instructions:  
@@ -199,7 +199,7 @@ The Talking Head 1KH dataset is used for out-of-distribution (OOD) appearance te
 
 ### ❄️ Build LMDB
 
-We use LMDB (Lightning Memory-Mapped Database) to store the dataset. LMDB is a high-performance, transactional key-value store that enables efficient data storage and fast access. 
+We use [LMDB](https://en.wikipedia.org/wiki/Lightning_Memory-Mapped_Database) (Lightning Memory-Mapped Database) to store the dataset. LMDB is a high-performance, transactional key-value store that enables efficient data storage and fast access. 
 
 To facilitate this process, we provide a script for building LMDB files in the directory: `preprocess/TETF/create_lmdb`. You can use this script to build LMDB for any dataset with minimal adjustments. 
 
@@ -207,7 +207,7 @@ To facilitate this process, we provide a script for building LMDB files in the d
 
 ## 🚀 Basics for Training
 
-We use the [PyTorch Lightning](https://lightning.ai/docs/pytorch/stable/) framework for training, following the design philosophy of the Stable Diffusion series. Our guiding principle is:  
+We use the [PyTorch Lightning](https://lightning.ai/docs/pytorch/stable/) framework for training, following the design philosophy of the [Stable Diffusion](https://github.com/CompVis/stable-diffusion) series. Our guiding principle is:  
 > **Modularity is king**  
 
 To achieve this, we adopt a **config-driven approach** where submodules are built and combined using `instantiate_from_config()`, similar to the method used in Stable Diffusion. 
@@ -246,7 +246,7 @@ Here is an example:
 
 python main.py --base configs/xxxxx.yaml --train --trainer.devices 8 --logdir /xxxx/xxx/ --extra 'model.base_learning_rate=5.e-6,model.params.backbone_config.params.dropout=0.08'
 ```
-- base: Specifies the config file to use.
+- --base: Specifies the config file to use.
 - --train: Indicates that the model is in training mode.
 - --trainer.devices: Specifies the number of GPUs to use (in this case, 8 GPUs).
 - --logdir: Specifies the directory to save the training logs.
@@ -267,7 +267,7 @@ INST_FLAG  # Indicates whether an instruction is provided
 AUDIO_FLAG  # Indicates whether audio is provided
 CKPT  # Model checkpoint to evaluate
 ```
-By modifying the values of INST_FLAG and AUDIO_FLAG, you can test the model for different tasks, such as emotional talking or facial motion control.
+By modifying the values of `INST_FLAG` and `AUDIO_FLAG`, you can test the model for different tasks, such as emotional talking or facial motion control.
 
 For benchmark evaluation and related metrics, the following scripts may be helpful: `talking/scripts/eval_benchmark_score_unify.sh`, `talking/scripts/lip_sync_score.py`, `talking/scripts/calculate_au_score.py`.
 
@@ -275,44 +275,44 @@ For benchmark evaluation and related metrics, the following scripts may be helpf
 
 As mentioned in the previous section, we use the GAIA model to extract the appearance and motion latents as training targets. However, since the GAIA model does not release its checkpoint, we provide some basic ideas for training your own VAE model. The basic config file can be found in `configs/vqvae_2enc-hdtf/tetf_autoencoder_scale_avena_extend_dense_64x64x3.yaml`.
 
-The main idea is to use the i-th landmark (representing motion) and the j-th image to reconstruct the i-th RGB image.
+The main idea is to use the $i$-th landmark (representing motion) and the $j$-th image to reconstruct the $i$-th RGB image.
 
 
 ### 🏠 Data
 
-The code is implemented in `talking.data.vqvae_2enc_hdtf.diffae_data.ExtendedAvenaDataset`. Based on the basic idea, we randomly select two images from a video. For the j-th video, we will extract the landmarks.
+The code is implemented in `talking.data.vqvae_2enc_hdtf.diffae_data.ExtendedAvenaDataset`. Based on the basic idea, we randomly select two images from a video. For the $j$-th image, we will extract the landmarks.
 
-**Note**: In GAIA, they use the internal landmark extraction tool, specifically the `RegressLandmarksFromImages` class (line 1118 in `talking/data/vqvae_2enc_hdtf/diffae_data.py`). However, this tool is closed-source. You may consider using the open-source package **dlib** to predict landmarks (as shown below). We also provide a basic function to achieve this. However, note that this model only detects 68 key points, while the GAIA tool uses 669 landmarks. More key points provide a better representation of motion information, so you may want to explore other facial alignment tools or commercial alternatives.
+**Note**: In GAIA, they use the internal landmark extraction tool, specifically the `RegressLandmarksFromImages` class ([line 1118](https://github.com/wangyuchi369/InstructAvatar/blob/dcef6f65dbaae43c8965a7dd30f02b34e1d089a9/talking/data/vqvae_2enc_hdtf/diffae_data.py#L1118) in `talking/data/vqvae_2enc_hdtf/diffae_data.py`). However, this tool is closed-source. You may consider using the open-source package **dlib** to predict landmarks (as shown below). We also provide a basic function to achieve this. However, note that this model only detects 68 key points, while the GAIA tool uses 669 landmarks. **More key points provide a better representation of motion information, so you may want to explore other facial alignment tools or commercial alternatives**.
 
 ``` python
-        def get_ldmk(frame):
-            img = Image.fromarray(frame).convert('RGB').resize((256,256))
-            img_array = np.asarray(img)
-            faces = detector(img_array)
-            if len(faces) != 1:
-                return None
-            # 68 sparse ldmks
-            sparse_ldmks = predictor(img_array, faces[0])
-            sparse_coords = np.zeros((sparse_ldmks.num_parts, 2), dtype=np.uint8)
-            for i in range(sparse_ldmks.num_parts):
-                sparse_coords[i] = (sparse_ldmks.part(i).x, sparse_ldmks.part(i).y) 
-                    
-            size=(256,256)
-            canvas = np.zeros((size[0], size[1], 3), dtype=np.uint8)
-            for i in range(sparse_coords.shape[0]):
-                x = int((sparse_coords[i][0]))
-                y = int((sparse_coords[i][1]))
+def get_ldmk(frame):
+    img = Image.fromarray(frame).convert('RGB').resize((256,256))
+    img_array = np.asarray(img)
+    faces = detector(img_array)
+    if len(faces) != 1:
+        return None
+    # 68 sparse ldmks
+    sparse_ldmks = predictor(img_array, faces[0])
+    sparse_coords = np.zeros((sparse_ldmks.num_parts, 2), dtype=np.uint8)
+    for i in range(sparse_ldmks.num_parts):
+        sparse_coords[i] = (sparse_ldmks.part(i).x, sparse_ldmks.part(i).y) 
+            
+    size=(256,256)
+    canvas = np.zeros((size[0], size[1], 3), dtype=np.uint8)
+    for i in range(sparse_coords.shape[0]):
+        x = int((sparse_coords[i][0]))
+        y = int((sparse_coords[i][1]))
 
-                canvas = cv2.circle(canvas, (x, y), 1, (255,255,255), -1)
+        canvas = cv2.circle(canvas, (x, y), 1, (255,255,255), -1)
 
-            return canvas
+    return canvas
 ```
 
 
 
 ### 🧚 Model
 
-The code is implemented in `talking.models.vqvae_2enc.autoencoder.AutoEncoderKLwithLDMK`. The model consists of two encoders and a decoder. We use the appearance encoder to encode the j-th image and the motion encoder to encode the i-th landmark image. The two latents are then concatenated and passed into the decoder, aiming to reconstruct the i-th RGB image.
+The code is implemented in `talking.models.vqvae_2enc.autoencoder.AutoEncoderKLwithLDMK`. The model consists of two encoders and a decoder. We use the appearance encoder to encode the $j$-th image and the motion encoder to encode the $i$-th landmark image. The two latents are then concatenated and passed into the decoder, aiming to reconstruct the $i$-th RGB image.
 
 Initially, the appearance encoder is initialized from Stable Diffusion, and the motion encoder shares the same initialized parameters.
 

@@ -52,7 +52,7 @@ We are actively working on open-sourcing this project. However, due to certain c
 
 - **Model Structure and Training Code:**  We share the full structure and training code for the InstructAvatar model, allowing users to understand and customize the training process for their own research.
 
-- **Inference Code:**  Our inference code enables simultaneous control of **emotional expression** and **facial motion** in avatar generation. 
+- **Inference Code:**  Our inference code enables simultaneous control of **emotional talking** and **facial motion** in avatar generation. 
 
 
 
@@ -67,7 +67,7 @@ We sincerely apologize for any inconvenience this may cause. If you have any que
 
 Recent advancements in talking avatar generation have achieved significant progress in realistic and accurate lip synchronization with audio. However, these methods often struggle to capture and convey fine-grained emotional expressions and facial motion, resulting in less vivid and less controllable avatars.  
 
-In this work, we propose **InstructAvatar**, a novel text-guided framework for generating emotionally expressive 2D avatars. Our approach enables fine-grained control, enhanced interactivity, and greater generalizability for video-based avatars. By utilizing natural language instructions, users can control both the **emotion** and **facial motion** of avatars with greater precision and expressiveness.  
+In this work, we propose **InstructAvatar**, a novel text-guided framework for generating emotionally expressive 2D avatars. Our approach enables fine-grained control, enhanced interactivity, and greater generalizability for avatars. By utilizing natural language instructions, users can control both the talking emotion and facial motion of avatars with greater precision and expressiveness.  
 
 
 
